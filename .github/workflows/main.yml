@@ -6,7 +6,7 @@ on:
       - main  # Change this to the branch you want to trigger the workflow on
 
 jobs:
-  ci:
+  build_and_publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,22 +25,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
- 
-      # Optionally, add steps for linting, code analysis, etc.
+
+      - name: Build
+        run: eas build -p android  # Replace with expo build:ios for iOS builds
 
       - name: Log in to Expo
         run: npx expo login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
 
-      - name: Build
-        run: npx eas build
-
-  cd:
-    needs: ci
-    runs-on: ubuntu-latest
-    steps:
-      
-      - name: Update Configuration
-        run: npx eas update
-
-      - name: Submit to App Stores
-        run: npx eas submit --platform android --release-channel default  # Replace android with ios if deploying to iOS
+      - name: Publish Update
+        run: npx eas update --platform android --release-channel default  # Replace android with ios for iOS updates
