@@ -33,4 +33,4 @@ jobs:
         run: eas build --platform android --profile production --non-interactive  # Adjust profile as needed
 
       - name: Publish Update
-        run: eas update --platform android --non-interactive 
+        run: npx eas update --platform android --non-interactive --branch main --message "Auto update from GitHub Actions"  # Adjust branch and message as needed
