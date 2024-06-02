@@ -29,6 +29,9 @@ jobs:
       - name: Log in to Expo
         run: npx expo login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
 
+      - name: Install react-native-gesture-handler
+        run: npm install react-native-gesture-handler
+
       - name: Build
         run: eas build --platform android --profile production --non-interactive  # Adjust profile as needed
 
