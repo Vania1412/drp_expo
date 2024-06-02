@@ -30,7 +30,7 @@ jobs:
         run: npx expo login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
 
       - name: Build
-        run: eas build -p android  # Replace with expo build:ios for iOS builds
+        run: eas build --platform android --profile production --non-interactive  # Adjust profile as needed
 
       - name: Publish Update
-        run: npx eas update --platform android --release-channel default  # Replace android with ios for iOS updates
+        run: eas update --platform android --non-interactive 
