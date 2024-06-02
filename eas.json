@@ -1,42 +1,25 @@
 {
   "cli": {
-    "appVersionSource": "remote"
+    "version": ">= 9.1.0"
   },
   "build": {
-    "base": {
-      "android": {
-        "autoIncrement": true
-      },
-      "ios": {
-        "autoIncrement": true
-      }
-    },
     "development": {
-      "extends": "base",
+      "developmentClient": true,
       "distribution": "internal",
-      "android": {
-        "gradleCommand": ":app:assembleDebug"
-      },
-      "ios": {
-        "simulator": true,
-        "buildConfiguration": "Debug"
-      }
+      "channel": "development"
     },
     "preview": {
-      "channel": "master",
       "distribution": "internal",
-      "extends": "base",
-      "android": {
-        "gradleCommand": ":app:assembleRelease"
-      },
-      "ios": {
-        "simulator": false,
-        "buildConfiguration": "Debug"
-      }
+      "channel": "preview"
     },
     "production": {
-      "channel": "production",
-      "extends": "base"
+      "android": {
+        "buildType": "app-bundle",
+        "applicationId": "com.rainie1412.savinggoal"  
+      },
+      "ios": {
+        "buildType": "archive"
+      }
     }
   },
   "submit": {
