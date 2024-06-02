@@ -1,4 +1,4 @@
-name: Expo CI/CD
+name: Expo CI/CD 
 
 on:
   push:
