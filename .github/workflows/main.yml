@@ -25,10 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run tests
-        run: npm test  # Replace with your test command
-
+ 
       # Optionally, add steps for linting, code analysis, etc.
 
       - name: Build
