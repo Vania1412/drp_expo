@@ -31,7 +31,7 @@ jobs:
         run: npx expo login -u ${{ secrets.EXPO_USERNAME }} -p ${{ secrets.EXPO_PASSWORD }}
 
       - name: Publish updates
-        run: npx expo publish --non-interactive  # Add any additional options you need for publishing
+        run: eas update --non-interactive  # Add any additional options you need for publishing
 
       - name: Deploy to Android
         run: eas submit --platform android --release-channel default   
