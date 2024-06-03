@@ -32,8 +32,8 @@ jobs:
       - name: Install react-native-gesture-handler
         run: npm install react-native-gesture-handler
 
-      - name: Build
-        run: eas build --platform android --profile production --non-interactive  # Adjust profile as needed
+      #- name: Build
+       # run: eas build --platform android --profile production --non-interactive  # Adjust profile as needed
 
       - name: Publish Update
         run: npx eas update --platform android --non-interactive --branch main --message "Auto update from GitHub Actions"  # Adjust branch and message as needed
