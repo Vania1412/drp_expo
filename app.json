@@ -25,12 +25,6 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "apiKey": "AIzaSyDt9p7b8cmcUI7RgSwxC_JBxpbdp3L1joU",
-      "authDomain": "saving-goal-1e180.firebaseapp.com",
-      "projectId": "saving-goal-1e180",
-      "storageBucket": "saving-goal-1e180.appspot.com",
-      "messagingSenderId": "472859181501",
-      "appId": "1:472859181501:android:9192b47b26f005b4fd52d4",
       "eas": {
         "projectId": "23f9696b-c374-4494-abc5-8e1bda71ad54"
       }

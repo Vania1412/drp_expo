@@ -1,28 +1,43 @@
+// HomePage.js
 import React from 'react';
 import { View, Text, Button, TextInput, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Menu from '../components/Menu'; // Import the Menu component
+import Menu from '../components/Menu';
+import { firestore } from '../firebase';
+import { collection, addDoc } from "firebase/firestore"; 
+
 
 const HomePage = () => {
   const navigation = useNavigation();
   const [goals, setGoals] = React.useState([
     // Sample data for goals
-    { id: '1', title: 'Trip to Italy', progress: 50, cost: 500},
+    { id: '1', title: 'Trip to Italy', progress: 50, cost: 500 },
   ]);
   const [newGoal, setNewGoal] = React.useState('');
   const [saving, setSaving] = React.useState('');
+  const [cost, setCost] = React.useState('');
 
-  const addGoal = () => {
-    if (newGoal.trim() && saving.trim()) {
-      setGoals([...goals, { id: String(goals.length + 1), title: newGoal, progress: 0, cost: parseFloat(saving) }]);
-      setNewGoal('');
-      setSaving('');
+  const addGoal = async () => {
+    if (newGoal.trim()) {
+      const newGoalData = {
+        title: newGoal,
+        progress: 0,
+        cost: parseFloat(cost),
+      };
+      try {
+        const docRef = await addDoc(collection(firestore, "goals"), newGoalData);
+        setGoals([...goals, { id: docRef.id, ...newGoalData }]);
+        setNewGoal('');
+        setCost('');
+      } catch (error) {
+        console.error("Error adding goal: ", error);
+      }
     }
   };
 
   return (
     <View style={styles.container}>
-      <Menu />  
+      <Menu />
       <View style={styles.header}>
         <Text style={styles.headerText}>Expected saving per month: £32{"\n"}Current saving: £250</Text>
         <Text style={styles.headerText}>Wendy237</Text>
@@ -32,6 +47,13 @@ const HomePage = () => {
         placeholder="Enter savings"
         value={saving}
         onChangeText={setSaving}
+        keyboardType="numeric"
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter costs"
+        value={cost}
+        onChangeText={setCost}
         keyboardType="numeric"
       />
       <TextInput
@@ -63,7 +85,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 20,
-    marginTop: 25,
   },
   headerText: {
     fontSize: 16,
